@@ -10,7 +10,10 @@ class TerminalItem extends React.Component{
         placeUa: this.props.placeUa
     }
 
-
+    getCoordinate (latitude, longitude){
+        // console.log("coordinate", latitude, longitude);
+        this.props.getCityCoordinate(latitude, longitude);
+    }
 
     render() {
         const{type, fullAddressUa, latitude, longitude, cityUA, placeUa} = this.state;
@@ -18,7 +21,7 @@ class TerminalItem extends React.Component{
             <div>{fullAddressUa}</div>
             <div>{placeUa}</div>
             <div>{cityUA}</div>
-            {/* <button onClick={getCoordinate}>Show on the map</button> */}
+            <button onClick={() => this.getCoordinate(longitude, latitude)}>Show on the map</button>
         </div>
     }
 }

@@ -5,6 +5,7 @@ import GoogleMapReact from 'google-map-react';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
+
 class Map extends React.Component {
   static defaultProps = {
     center: {
@@ -15,6 +16,8 @@ class Map extends React.Component {
   };
 
     render() {
+      const {onGetCity} = this.props;
+      console.log("onGetCity", onGetCity)
         return(
             <div className="container-map">
                 <div id="map">
@@ -29,8 +32,8 @@ class Map extends React.Component {
                         text="My Marker"
                     />
                      <Marker
-                        lat={11.0168}
-                        lng={76.9558}
+                        lat={Number(onGetCity.latitude)}
+                        lng={Number(onGetCity.longitude)}
                         name="My Marker"
                         color="blue"
                     />
