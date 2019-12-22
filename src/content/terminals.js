@@ -22,7 +22,6 @@ class Terminals extends Component {
             fullAddressUa={item.fullAddressUa}
             cityUA={item.cityUA}
             placeUa={item.placeUa}
-
             getCityCoordinate={(latitude, longitude) => this.getCityCoordinate(latitude, longitude)}
             ></TerminalItem> 
         })

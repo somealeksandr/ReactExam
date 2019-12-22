@@ -17,7 +17,7 @@ class Map extends React.Component {
 
     render() {
       const {onGetCity} = this.props;
-      console.log("onGetCity", onGetCity)
+      // console.log("onGetCity", onGetCity)
         return(
             <div className="container-map">
                 <div id="map">
@@ -29,12 +29,12 @@ class Map extends React.Component {
                     <AnyReactComponent
                         lat={50.619154}
                         lng={26.252096}
-                        text="My Marker"
+                       
                     />
                      <Marker
                         lat={Number(onGetCity.latitude)}
                         lng={Number(onGetCity.longitude)}
-                        name="My Marker"
+                        name="Rivne"
                         color="blue"
                     />
                     </GoogleMapReact>

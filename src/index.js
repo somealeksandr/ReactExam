@@ -6,45 +6,61 @@ import Search from "./search/search";
 import Map from "./map/map";
 import Terminals from './content/terminals';
 
-
 class App extends React.Component {
   state = {
     List: [],
-    onFindCity: "Rivne",
-    onGetCity: {latitude: "50.619154", longitude: "26.252096"}
-  }
+    city: "Rivne",
+    onGetCity: { latitude: "", longitude: "" }
+  };
 
   componentDidMount() {
-    const {onFindCity} = this.state;
-        fetch(
-          `https://api.privatbank.ua/p24api/infrastructure?json&tso&address=&city=${onFindCity}`
-        )
+    console.log("componentDidMount", this.state.city)
+    const {city} = this.state;
+    fetch(
+      `https://api.privatbank.ua/p24api/infrastructure?json&tso&address=&city=${city}`
+    )
           .then(response => response.json())
           .then(({devices}) => {
-              console.log(devices)
+              // console.log(devices)
             this.setState({
               List: devices
             });
           });
-      }
+  };
+    
+  componentDidUpdate() {
+    console.log("componentDidUpdate", this.state.city);
+  };
 
-      onFindCity(i){
-        // console.log(typeof i);
-        this.setState({
-          onFindCity: i
-        })
+      onFindCity = (i) =>{
+        // console.log(i);
+        // this.setState({
+        //   city: i
+        // });
+        // const {city} = this.state;
+    fetch(
+      `https://api.privatbank.ua/p24api/infrastructure?json&tso&address=&city=${i}`
+    )
+          .then(response => response.json())
+          .then(({devices}) => {
+              // console.log(devices)
+            this.setState({
+              List: devices
+            });
+          });
       };
-      onGetCity(latitude, longitude){
-        // console.log(typeof latitude, longitude)
-        this.setState({
-          onGetCity: {latitude, longitude}
-        })
-      }
+
+  onGetCity = (latitude, longitude) => {
+    // console.log(typeof latitude, longitude)
+    this.setState({
+      onGetCity: { latitude, longitude }
+    });
+  };
   
     render() {
       // console.log("arr", this.state.onGetCity)
       return (
-        <div className="container bootstrap snippet">
+        <div className="bootstrap snippet">
           <Search onFindCity={this.onFindCity}></Search>
           <Terminals TerminalList={this.state.List} onGetCity={(latitude, longitude) => this.onGetCity(latitude, longitude)}></Terminals>
           <Map Coordinate={this.state.List} onGetCity={this.state.onGetCity}></Map>
@@ -52,7 +68,6 @@ class App extends React.Component {
       );
     }
   }
-
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
